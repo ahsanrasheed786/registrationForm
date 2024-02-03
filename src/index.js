@@ -13,7 +13,7 @@ const static_path=path.join(__dirname,"../public")
 app.use(express.static(static_path))
 app.set("view engine","hbs")
 
-app.get("/register",(req ,res)=>{
+app.get("/",(req ,res)=>{
     //rendring the index page
 res.render("index")
 })
