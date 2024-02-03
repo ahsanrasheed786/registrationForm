@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Sign Up / Sign In</title>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 rounded shadow-lg w-96">
+        <h2 class="text-2xl font-semibold mb-4">Welcome</h2>
+
+        <!-- Sign Up Form -->
+        <form id="signup-form" action="/register" method="post">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="mb-4">
+                    <label for="first-name" class="block text-sm font-medium text-gray-600">First Name</label>
+                    <input type="text" id="first-name" name="firstName" class="mt-1 p-2 w-full border rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="last-name" class="block text-sm font-medium text-gray-600">Last Name</label>
+                    <input type="text" id="last-name" name="lastName" class="mt-1 p-2 w-full border rounded">
+                </div>
+            </div>
+             <div class="mb-4">
+                    <label for="userName" class="block text-sm font-medium text-gray-600">User Name</label>
+                    <input type="text" id="userName" name="username" class="mt-1 p-2 w-full border rounded" placeholder="efault(First Name +Last Name)">
+                </div>
+            <div class="mb-4">
+                <label for="phone-number" class="block text-sm font-medium text-gray-600">Phone Number</label>
+                <input type="tel" id="phone-number" name="phone" class="mt-1 p-2 w-full border rounded">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+                <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded">
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded">
+            </div>
+            <button type="submit"  class="w-full bg-blue-500 text-white p-2 rounded">Sign Up</button>
+                   {{!-- onclick="signup()" --}}
+        </form>
+
+        <!-- Sign In Form -->
+        <form id="signin-form" style="display:none;" action="/signIn" method="post">
+            <div class="mb-4">
+                <label for="signin-username" class="block text-sm font-medium text-gray-600">Username</label>
+                <input type="text" id="signin-username" name="signinUsername" class="mt-1 p-2 w-full border rounded" placeholder="UserName or Email">
+            </div>
+            <div class="mb-4">
+                <label for="signin-password" class="block text-sm font-medium text-gray-600">Password</label>
+                <input type="password" id="signin-password" name="signinPassword" class="mt-1 p-2 w-full border rounded">
+            </div>
+            <button type="submit"  class="w-full bg-green-500 text-white p-2 rounded">Sign In</button>
+                          {{!-- onclick="signin()" --}}
+        </form>
+
+        <!-- Buttons at the bottom -->
+        <div class="mt-8 flex justify-between">
+            <button id="signup-btn" onclick="toggleForm('signup-form')" class="w-full  text-blue-700 p-2 rounded" style="display:none;">Sign Up</button>
+            <button id="signin-btn" onclick="toggleForm('signin-form')" class="w-full  text-blue-700 p-2 rounded" >Sign In</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(formId) {
+            var signupForm = document.getElementById("signup-form");
+            var signinForm = document.getElementById("signin-form");
+            var signupBtn = document.getElementById("signup-btn");
+            var signinBtn = document.getElementById("signin-btn");
+
+            if (formId === "signup-form") {
+                signupForm.style.display = "block";
+                signinForm.style.display = "none";
+                signupBtn.style.display = "none";
+                signinBtn.style.display = "block";
+            } else {
+                signupForm.style.display = "none";
+                signinForm.style.display = "block";
+                signupBtn.style.display = "block";
+                signinBtn.style.display = "none";
+            }
+        }
+{{!-- 
+        function signup() {
+            // Get values from the signup form
+            var firstName = document.getElementById("first-name").value;
+            var lastName = document.getElementById("last-name").value;
+            var phoneNumber = document.getElementById("phone-number").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Perform signup logic (add your own logic here)
+
+            // For demonstration purposes, just log the values
+            console.log("Sign Up - First Name: " + firstName + ", Last Name: " + lastName + ", Phone Number: " + phoneNumber + ", Email: " + email + ", Password: " + password);
+        } --}}
+
+        function signin() {
+            // Get values from the signin form
+            var username = document.getElementById("signin-username").value;
+            var password = document.getElementById("signin-password").value;
+
+            // Perform signin logic (add your own logic here)
+
+            // For demonstration purposes, just log the values
+            console.log("Sign In - Username: " + username + ", Password: " + password);
+        }
+    </script>
+</body>
+</html>
+    
