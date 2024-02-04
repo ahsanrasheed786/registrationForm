@@ -8,28 +8,41 @@ const UserSechma= new mongoose.Schema({
     },
     lastname:{
         type:String,
-        require:true
+        require:true,
+        trim:true
     },
     Username:{
         type:String,
-        require:true
+        require:true,
+        trim:true
     },
 
     userName:{
         type:String,
-        require:true
+        require:true,
+        trim:true
     },
     phone:{
         type:Number,
         require:true,
-        Unique:true
+        Unique:true,
+        trim:true
     },
     email:{
         type:String,
         require:true,
-        Unique:true
+        Unique:true,
+        trim:true
     },
     passward:{
+        type:String,
+        require:true
+    },
+    image:{
+        type:String,
+        require:true
+    },
+    baseImage:{
         type:String,
         require:true
     }

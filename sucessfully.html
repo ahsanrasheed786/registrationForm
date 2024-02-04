@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .success-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .redirect-message {
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-container">
+        <div class="success-message">Congratulations! You have successfully signed up.</div>
+        <div class="redirect-message">You will be redirected to the home page shortly...</div>
+    </div>
+
+    <script>
+        // You can add a script to redirect the user after a certain time (e.g., 5 seconds)
+        setTimeout(function() {
+            window.location.href = "/BackToSign"; // Replace "home.html" with your actual home page URL
+        }, 5000); // 5000 milliseconds = 5 seconds
+    </script>
+
+</body>
+</html>

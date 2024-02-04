@@ -1,81 +1,4 @@
-const express = require("express")
-const app=express();
-const port =process.env.PORT || 4000
-const path=require("path");
-const RegisteredUser = require("./models/model");
-require("./db/conn")
-
-app.use(express.json())
-app.use(express.urlencoded({extended:false}));
-//this is used to encode the sign up data 
-
-const static_path=path.join(__dirname,"../public")
-const static_ecomerance=path.join(__dirname,"../ecomrance site.html")
-const static_SucessfulySignUP=path.join(__dirname,"../sucessfully.html")
-const static_BackToSign=path.join(__dirname,"../redirectSignIn.html")
-const static_IncorrectSignIN=path.join(__dirname,"../IncorrectUser.html")
-app.use(express.static(static_path))
-app.use(express.static(static_ecomerance))
-app.use(express.static(static_SucessfulySignUP))
-app.use(express.static(static_BackToSign))
-app.use(express.static(static_IncorrectSignIN))
-app.set("view engine","hbs")
-
-app.get("/",(req ,res)=>{
-    //rendring the index page
-res.render("index")
-})
-
-app.post("/register",(req ,res)=>{
-    let userName=req.body.username
-    let makeUserName=(req.body.firstName+req.body.lastName).toLowerCase()
-    
-
- const dataObj={
-    "firstname":req.body.firstName,
-    "lastname":req.body.lastName,
-    "Username":userName ||makeUserName,
-    "phone":req.body.phone,
-    "email":req.body.email,
-    "passward":req.body.password,
-    "image":req.body.image,
-    "baseImage":req.body.baseImage
- }
-
-const data =new RegisteredUser(dataObj)
-data.save()
-.then(()=>{
-res.sendFile(static_SucessfulySignUP)
-// res.send("sucessfully registered")
-// res.send("sucessfully registered")
-})
-.catch((e)=>{
-res.send(e)
-})
-})
-
-app.post('/signIn',async(req,res)=>{
-    const signInUsername=req.body.signinUsername
-    const signInPassword=req.body.signinPassword
-
-    try {
-      const answer=  await RegisteredUser.findOne({
-        $or: [
-            { email: signInUsername },
-            { Username: signInUsername }
-          ]
-      })
-      
-      let ServerUserName=  (answer.firstname+answer.lastname).toLowerCase() 
-        let ServerUserEmail=  answer.email 
-       
-        if ((ServerUserName ==signInUsername || ServerUserEmail ==signInUsername) && answer.passward==signInPassword ) {
-            // res.send('Sucessfull login' )
-            // res.sendFile(static_ecomerance)
-            res.send(`
-            
-            
-            <!doctype html>
+<!doctype html>
 <html>
 
 <head>
@@ -117,14 +40,7 @@ app.post('/signIn',async(req,res)=>{
                 </ul>
             </div>
             <div class="flex items-center gap-6">
-            
-            <div class=" items-center justify-center ">
-            <img src=${answer.baseImage} alt="Profile Image" class="rounded-full h-16 w-16 object-cover">
-            </div>
-
-                <button class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">${answer.firstname} </button>
-
-
+                <button class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Sign In</button>
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
     </header>
@@ -395,28 +311,3 @@ app.post('/signIn',async(req,res)=>{
 </body>
 
 </html>
-            
-            
-            `)
-
-        } else {
-            // res.send('userName or pasward is incorrect')            
-            res.sendFile(static_IncorrectSignIN)            
-        }
-    } catch (error) {
-        res.send("Record Not found")
-    }
-
-})
-
-
-app.get("/BackToSign",(req,res)=>{
-res.sendFile(static_BackToSign)
-})
-
-
-
-
-app.listen(port,()=>{
-    console.log(`Server is runing on thee server ${port}`);
-})
